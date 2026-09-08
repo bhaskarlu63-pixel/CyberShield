@@ -5,3 +5,4 @@ passlib
 bcrypt==4.0.1
 httpx
 pydantic
+psycopg2-binary
