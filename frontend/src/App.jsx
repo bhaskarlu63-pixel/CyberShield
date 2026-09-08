@@ -2,7 +2,7 @@ import { useState } from "react";
 import jsPDF from "jspdf";
 import "./App.css";
 
-const API_URL = "/api";
+const API_URL = import.meta.env.PROD ? "/svc/api" : "http://127.0.0.1:8000";
 
 function App() {
   // --------------------------------------------------
