@@ -20,6 +20,17 @@ app = FastAPI(title="CyberShield API")
 
 
 # ==================================================
+# VERCEL SERVICES API PREFIX
+# ==================================================
+
+@app.middleware("http")
+async def strip_vercel_prefix(request, call_next):
+    if request.scope["path"].startswith("/svc/api"):
+        request.scope["path"] = request.scope["path"][8:] or "/"
+    return await call_next(request)
+
+
+# ==================================================
 # ALLOW REACT FRONTEND TO COMMUNICATE WITH BACKEND
 # ==================================================
 
@@ -861,6 +872,7 @@ def get_single_report(
         )
         .first()
     )
+
 
     if not report:
         raise HTTPException(
